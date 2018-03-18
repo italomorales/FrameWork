@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FrameWork.WebApi.Container;
+using FrameWork.WebApi.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FrameWork.WebApi
 {
@@ -24,6 +27,9 @@ namespace FrameWork.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            JwtConfigure.Configure(services);
+                    
             services.AddMvc();
 
             ContainerBuilder.ConfigureContainer(services);
@@ -37,6 +43,8 @@ namespace FrameWork.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+             app.UseAuthentication();
 
             app.UseMvc();
         }
