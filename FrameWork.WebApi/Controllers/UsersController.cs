@@ -32,6 +32,7 @@ namespace FrameWork.WebApi.Controllers
 
     public interface IUsersController  {
         User Get(int id);
+        User Get();
     }
 
 }

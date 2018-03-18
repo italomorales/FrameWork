@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FrameWork.WebApi.Container;
 
-namespace FrameWork.Tests
+namespace FrameWork.Tests.Controllers
 {
     [TestClass]
-    public class UsersTest : BaseTest
+    public class UsersControllerTest : BaseTest
     {
 
         [TestMethod]
