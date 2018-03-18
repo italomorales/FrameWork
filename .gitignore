@@ -251,12 +251,5 @@ paket-files/
 .idea/
 *.sln.iml
 
-# Projetos
-/web/Qx3Energia.Thunders.WebApp/app/components
-/database/Qx3Energia.Thunders.Database.Deployer/_backup
-
-# Produtos do Grunt Serve
-web/Qx3Energia.Thunders.WebApp/app/css/thunders.css
-
-# Pasta temporária gerada pelo VS2015
+# Pasta temporï¿½ria gerada pelo VS2015
 solutions/.localHistory
