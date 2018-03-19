@@ -1,20 +1,19 @@
 ﻿using System;
+using System.Linq;
 using FrameWork.Model;
 
 namespace FrameWork.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<FrameWorkContext, User>, IUserRepository
     {
-        public User Get(int id)
+        public UserRepository(FrameWorkContext contexto)
         {
-            return new User {
-                Id = 1, Name = "Italo"
-            };
+            DataContext = contexto;
+            DbSet = DataContext.Set<User>();
         }
     }
 
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-        User Get(int id);
     }
 }

@@ -21,12 +21,10 @@ namespace FrameWork.WebApi.Controllers
             _userServices = userServices;
         }
 
-        [Authorize(Roles="ROLEUSER")]
         [HttpGet("{id}")]
         public User Get(int id) => _userServices.Get(id);
 
         [HttpGet()]
-        [Authorize(Roles = "ROLETESTE")]
         public User Get() => new User { Id = 2, Name = "Teste" };
     }
 

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrameWork.WebApi
 {
@@ -29,6 +30,12 @@ namespace FrameWork.WebApi
         {
 
             JwtConfigure.Configure(services);
+
+            services.AddEntityFrameworkNpgsql()
+                    .AddDbContext<FrameWork.Repository.FrameWorkContext>(
+                        options => options.UseNpgsql(
+                        Configuration.GetConnectionString("framework")));
+
                     
             services.AddMvc();
 

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/FrameWork.Tests/FrameWork.Tests.csproj"
+                "${workspaceFolder}/FrameWork.WebApi/FrameWork.WebApi.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

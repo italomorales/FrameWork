@@ -22,8 +22,7 @@ namespace FrameWork.Services
         {
             try
             {
-                _logger.LogTrace("Teste de Log");
-                return _userRepository.Get(id);
+                return _userRepository.GetById(id);
             }
             catch(Exception ex)
             {
