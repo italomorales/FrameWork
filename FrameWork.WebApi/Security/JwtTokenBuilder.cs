@@ -10,52 +10,52 @@ namespace FrameWork.WebApi.Security
 
 public sealed class JwtTokenBuilder
     {
-        private SecurityKey securityKey = null;
-        private string subject = "";
-        private string issuer = "";
-        private string audience = "";
-        private Dictionary<string, string> claims = new Dictionary<string, string>();
-        private int expiryInMinutes = 5;
+        private SecurityKey _securityKey;
+        private string _subject = "";
+        private string _issuer = "";
+        private string _audience = "";
+        private readonly Dictionary<string, string> _claims = new Dictionary<string, string>();
+        private int _expiryInMinutes = 5;
 
         public JwtTokenBuilder AddSecurityKey(SecurityKey securityKey)
         {
-            this.securityKey = securityKey;
+            _securityKey = securityKey;
             return this;
         }
 
         public JwtTokenBuilder AddSubject(string subject)
         {
-            this.subject = subject;
+            _subject = subject;
             return this;
         }
 
         public JwtTokenBuilder AddIssuer(string issuer)
         {
-            this.issuer = issuer;
+            _issuer = issuer;
             return this;
         }
 
         public JwtTokenBuilder AddAudience(string audience)
         {
-            this.audience = audience;
+            _audience = audience;
             return this;
         }
 
         public JwtTokenBuilder AddClaim(string type, string value)
         {
-            this.claims.Add(type, value);
+            _claims.Add(type, value);
             return this;
         }
 
         public JwtTokenBuilder AddClaims(Dictionary<string, string> claims)
         {
-            this.claims.Union(claims);
+            _claims.Union(claims);
             return this;
         }
 
         public JwtTokenBuilder AddExpiry(int expiryInMinutes)
         {
-            this.expiryInMinutes = expiryInMinutes;
+            _expiryInMinutes = expiryInMinutes;
             return this;
         }
 
@@ -65,18 +65,18 @@ public sealed class JwtTokenBuilder
 
             var claims = new List<Claim>
             {
-              new Claim(JwtRegisteredClaimNames.Sub, this.subject),
+              new Claim(JwtRegisteredClaimNames.Sub, _subject),
               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }
-            .Union(this.claims.Select(item => new Claim(item.Key, item.Value)));
+            .Union(_claims.Select(item => new Claim(item.Key, item.Value)));
 
             var token = new JwtSecurityToken(
-                              issuer: this.issuer,
-                              audience: this.audience,
+                              issuer: _issuer,
+                              audience: _audience,
                               claims: claims,
-                              expires: DateTime.UtcNow.AddMinutes(expiryInMinutes),
+                              expires: DateTime.UtcNow.AddMinutes(_expiryInMinutes),
                               signingCredentials: new SigningCredentials(
-                                                        this.securityKey,
+                                                        _securityKey,
                                                         SecurityAlgorithms.HmacSha256));
 
             return new JwtToken(token);
@@ -86,17 +86,17 @@ public sealed class JwtTokenBuilder
 
         private void EnsureArguments()
         {
-            if (this.securityKey == null)
-                throw new ArgumentNullException("Security Key");
+            if (_securityKey == null)
+                throw new ArgumentNullException($"Security Key");
 
-            if (string.IsNullOrEmpty(this.subject))
-                throw new ArgumentNullException("Subject");
+            if (string.IsNullOrEmpty(_subject))
+                throw new ArgumentNullException($"Subject");
 
-            if (string.IsNullOrEmpty(this.issuer))
-                throw new ArgumentNullException("Issuer");
+            if (string.IsNullOrEmpty(_issuer))
+                throw new ArgumentNullException($"Issuer");
 
-            if (string.IsNullOrEmpty(this.audience))
-                throw new ArgumentNullException("Audience");
+            if (string.IsNullOrEmpty(_audience))
+                throw new ArgumentNullException($"Audience");
         }
 
         #endregion

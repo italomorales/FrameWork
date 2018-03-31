@@ -5,15 +5,15 @@ namespace FrameWork.WebApi.Security
 {
     public sealed class JwtToken
     {
-        private JwtSecurityToken token;
+        private readonly JwtSecurityToken _token;
 
         internal JwtToken(JwtSecurityToken token)
         {
-            this.token = token;
+            _token = token;
         }
 
-        public DateTime ValidTo => token.ValidTo;
-        public string Value => new JwtSecurityTokenHandler().WriteToken(this.token);
+        public DateTime ValidTo => _token.ValidTo;
+        public string Value => new JwtSecurityTokenHandler().WriteToken(_token);
     }
 }
    

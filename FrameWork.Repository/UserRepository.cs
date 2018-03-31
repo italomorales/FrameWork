@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FrameWork.Model;
+﻿using FrameWork.Model;
 
 namespace FrameWork.Repository
 {

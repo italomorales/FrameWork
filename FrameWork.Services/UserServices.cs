@@ -27,7 +27,7 @@ namespace FrameWork.Services
             catch(Exception ex)
             {
                 _logger.LogError(ex, "Erro ao obter usuário");
-                throw ex;
+                throw;
             }
             
         }

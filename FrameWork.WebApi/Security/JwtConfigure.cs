@@ -1,7 +1,4 @@
-using FrameWork.Repository;
-using FrameWork.Services;
 using Microsoft.Extensions.DependencyInjection;
-using FrameWork.WebApi.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
